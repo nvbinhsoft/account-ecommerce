@@ -1,6 +1,6 @@
 create schema account;
 
-create table User
+create table users
 (
     id         bigint auto_increment,
     email      varchar(250) not null,

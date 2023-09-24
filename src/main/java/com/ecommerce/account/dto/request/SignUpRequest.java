@@ -34,4 +34,14 @@ public class SignUpRequest {
     public SignUpRequest() {
 
     }
+
+    @Override
+    public String toString() {
+        return "SignUpRequest{" +
+                "username='" + username + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }
