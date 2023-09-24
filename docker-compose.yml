@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  consul:
+    image: consul:1.10.2
+    ports:
+      - "8500:8500"
+    command: ["agent", "-dev", "-client", "0.0.0.0"]
+    environment:
+      CONSUL_BIND_INTERFACE: eth0
+    volumes:
+      - .db/consul-data:/consul/data
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    environment:
+      REDIS_PASSWORD: root
+    volumes:
+      - .db/redis-data:/data
+
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+    volumes:
+      - .db/mysql-data:/var/lib/mysql
