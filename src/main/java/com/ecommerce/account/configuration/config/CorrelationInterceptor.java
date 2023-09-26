@@ -2,6 +2,7 @@ package com.ecommerce.account.configuration.config;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -33,7 +34,7 @@ public class CorrelationInterceptor implements HandlerInterceptor {
      * @return True to proceed with the request, false to stop processing.
      */
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+    public boolean preHandle(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull Object handler) {
         final String correlationId = getOrGenerateCorrelationId(request, response);
         MDC.put(CORRELATION_ID_LOG_VAR_NAME, correlationId);
         return true;
@@ -49,7 +50,7 @@ public class CorrelationInterceptor implements HandlerInterceptor {
      * @param ex       Any exception that may have occurred during execution.
      */
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
+    public void afterCompletion(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull Object handler, Exception ex) {
         MDC.remove(CORRELATION_ID_LOG_VAR_NAME);
     }
 
@@ -63,7 +64,7 @@ public class CorrelationInterceptor implements HandlerInterceptor {
      * @param modelAndView The model and view.
      */
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+    public void postHandle(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull Object handler,
             ModelAndView modelAndView) {
         // You can leave this empty or log something if you wish.
     }
